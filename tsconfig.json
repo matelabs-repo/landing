@@ -1,12 +1,15 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "jsx": "preserve",
-    "allowImportingTsExtensions": true,
-    "noEmit": true
-  },
-  "include": ["src"]
+	"compilerOptions": {
+		"strict": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"jsx": "preserve",
+		"allowImportingTsExtensions": true,
+		"noEmit": true
+	},
+	"include": [
+		"src",
+		"./worker-configuration.d.ts"
+	]
 }
