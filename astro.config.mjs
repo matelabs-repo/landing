@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
-  output: 'static',
+  output: "hybrid",
   site: 'https://matelabs.io',
+
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
@@ -10,10 +13,14 @@ export default defineConfig({
       prefixDefaultLocale: true,
     },
   },
+
   trailingSlash: 'always',
+
   vite: {
     css: {
       devSourcemap: true,
     },
   },
+
+  adapter: cloudflare()
 });
