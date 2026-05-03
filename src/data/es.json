@@ -1,0 +1,84 @@
+{
+  "site": {
+    "title": "mateLabs — Product Studio",
+    "description": "Construimos productos digitales de alto impacto usando IA como multiplicador de equipo. Product Studio con inteligencia artificial en nuestras venas.",
+    "url": "https://matelabs.io"
+  },
+  "lang": {
+    "es": "ES",
+    "en": "EN"
+  },
+  "hero": {
+    "claim_pre": "Somos un ",
+    "claim_accent": "Product Studio",
+    "claim_post": " con IA en nuestras venas.",
+    "extension": "Construimos productos digitales de alto impacto usando inteligencia artificial como multiplicador de equipo. Con modelos de negocio adaptados a cada industria y a las necesidades del momento.",
+    "cta": "Hablemos",
+    "scroll": "Explorar"
+  },
+  "capacidades": {
+    "label": "Capacidades",
+    "title": "¿Qué hacemos?",
+    "items": [
+      {
+        "title": "Plataformas de streaming",
+        "description": "OTT white-label para operadores. Desde el CMS hasta el reproductor, listo para escalar.",
+        "icon": "🎬",
+        "upcoming": false
+      },
+      {
+        "title": "IA como multiplicador",
+        "description": "Frameworks y agentes de IA que reemplazan equipos multidisciplinarios. Más ambición con menos fricción.",
+        "icon": "🤖",
+        "upcoming": false
+      },
+      {
+        "title": "Plataformas de turismo",
+        "description": "Soluciones digitales para hotelería, vuelos y traslados.",
+        "icon": "✈️",
+        "upcoming": true
+      }
+    ],
+    "upcoming": "Próximamente"
+  },
+  "diferenciador": {
+    "label": "Nuestro enfoque",
+    "title": "¿Por qué nosotros?",
+    "steps": [
+      { "label": "El problema", "text": "El mercado necesita plataformas digitales robustas adaptadas a Latinoamérica." },
+      { "label": "La barrera", "text": "Pero construir productos de alto impacto requiere equipos multidisciplinarios que son caros y difíciles de armar." },
+      { "label": "Nuestra respuesta", "text": "En mateLabs usamos IA como multiplicador de equipo para hacer viables productos que antes no lo eran." }
+    ],
+    "close": "Modelos de negocio flexibles, adaptados a cada industria y al momento de cada proyecto."
+  },
+  "contacto": {
+    "label": "Contacto",
+    "title": "Hablemos",
+    "subtitle": "¿Tenés un proyecto en mente? Contanos y armamos algo juntos.",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "¿Qué tenés en mente?",
+    "submitLabel": "Enviar",
+    "successMessage": "Gracias. Te respondemos en menos de 48h.",
+    "errorMessage": "Algo salió mal. Intentá de nuevo o escribinos a hola@matelabs.io",
+    "validation": {
+      "nameRequired": "Este campo es obligatorio",
+      "emailRequired": "Este campo es obligatorio",
+      "emailInvalid": "Email inválido",
+      "messageRequired": "Este campo es obligatorio"
+    }
+  },
+  "footer": {
+    "email": "hola@matelabs.io",
+    "copyright": "© 2026 mateLabs",
+    "backTop": "↑ Volver arriba",
+    "social": [
+      { "name": "LinkedIn", "url": "https://linkedin.com/company/matelabs", "label": "in" },
+      { "name": "X", "url": "https://x.com/matelabs", "label": "𝕏" },
+      { "name": "Instagram", "url": "https://instagram.com/matelabs", "label": "ig" }
+    ]
+  }
+}

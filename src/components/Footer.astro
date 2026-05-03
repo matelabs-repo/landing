@@ -1,0 +1,200 @@
+---
+export interface Props {
+  data: {
+    site: {
+      description: string;
+    };
+    footer: {
+      email: string;
+      copyright: string;
+      backTop: string;
+      social: Array<{
+        name: string;
+        url: string;
+        label: string;
+      }>;
+    };
+  };
+}
+
+const { data } = Astro.props;
+const { footer, site } = data;
+---
+
+<style>
+  .footer {
+    background: #080808;
+    padding: 80px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-primary), transparent);
+    opacity: 0.4;
+  }
+
+  .footer-inner {
+    position: relative;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+  }
+
+  .footer-logo {
+    height: 36px;
+    width: auto;
+    opacity: 0.9;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.45);
+    max-width: 360px;
+    line-height: 1.6;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .footer-social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+
+  .footer-email {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.2s ease;
+  }
+
+  .footer-email:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    margin-top: 12px;
+  }
+
+  .footer-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 24px;
+  }
+
+  .footer-copy {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .footer-back-top {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .footer-back-top:hover {
+    color: var(--color-primary);
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      text-align: left;
+      gap: 20px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+  }
+</style>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <img
+        class="footer-logo"
+        src="/assets/logo-white.svg"
+        alt="mateLabs"
+      />
+      <p class="footer-tagline">{site.description}</p>
+    </div>
+    <div class="footer-right">
+      <div class="footer-social">
+        {footer.social.map((s) => (
+          <a
+            class="footer-social-link"
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.name}
+          >
+            {s.label}
+          </a>
+        ))}
+      </div>
+      <a class="footer-email" href={`mailto:${footer.email}`}>{footer.email}</a>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <a class="footer-back-top" href="#hero">{footer.backTop}</a>
+    <p class="footer-copy">{footer.copyright}</p>
+  </div>
+</footer>

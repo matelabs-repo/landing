@@ -1,0 +1,348 @@
+---
+export interface Props {
+  data: {
+    contacto: {
+      label: string;
+      title: string;
+      subtitle: string;
+      nameLabel: string;
+      namePlaceholder: string;
+      emailLabel: string;
+      emailPlaceholder: string;
+      messageLabel: string;
+      messagePlaceholder: string;
+      submitLabel: string;
+      successMessage: string;
+      errorMessage: string;
+      validation: {
+        nameRequired: string;
+        emailRequired: string;
+        emailInvalid: string;
+        messageRequired: string;
+      };
+    };
+  };
+}
+
+const { data } = Astro.props;
+const { contacto } = data;
+---
+
+<style>
+  .contact {
+    padding: 120px 24px;
+    position: relative;
+    background: #fafafa;
+  }
+
+  .contact-inner {
+    max-width: var(--form-max-width);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+
+  .contact-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 16px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .contact-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 400;
+    color: var(--color-secondary);
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .form-row {
+      flex-direction: row;
+    }
+
+    .form-row .form-field {
+      flex: 1;
+    }
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-secondary);
+    letter-spacing: 0.02em;
+  }
+
+  .form-input {
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 14px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: var(--color-white);
+    color: var(--color-black);
+    transition: all 0.2s ease;
+    outline: none;
+    width: 100%;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(57, 181, 74, 0.1);
+  }
+
+  .form-input.is-error {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  .form-error {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-error);
+  }
+
+  .form-submit {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 40px;
+    background: var(--color-primary);
+    color: var(--color-black);
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    align-self: center;
+    min-width: 160px;
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+  }
+
+  .form-submit:hover {
+    background: #4cc95e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(57, 181, 74, 0.25);
+  }
+
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .form-result {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .form-result-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .form-result-success {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-black);
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  .form-result-error {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-error);
+    line-height: 1.6;
+  }
+</style>
+
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <span class="contact-label">{contacto.label}</span>
+    <h2 class="contact-title">{contacto.title}</h2>
+    <p class="contact-subtitle">{contacto.subtitle}</p>
+    <form class="form" id="contact-form">
+      <input type="hidden" name="access_key" value="1ec32402-fe16-49ea-a4ef-6e853f614dd6" />
+      <input type="hidden" name="subject" value="Contacto desde matelabs.io" />
+      <input type="hidden" name="from_name" value="mateLabs Landing" />
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="name">{contacto.nameLabel}</label>
+          <input
+            class="form-input"
+            id="name"
+            type="text"
+            name="name"
+            placeholder={contacto.namePlaceholder}
+            required
+          />
+          <span class="form-error" data-error="name"></span>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">{contacto.emailLabel}</label>
+          <input
+            class="form-input"
+            id="email"
+            type="email"
+            name="email"
+            placeholder={contacto.emailPlaceholder}
+            required
+          />
+          <span class="form-error" data-error="email"></span>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="message">{contacto.messageLabel}</label>
+        <textarea
+          class="form-input form-textarea"
+          id="message"
+          name="message"
+          placeholder={contacto.messagePlaceholder}
+          required
+        ></textarea>
+        <span class="form-error" data-error="message"></span>
+      </div>
+      <button class="form-submit" type="submit">
+        <span class="submit-label">{contacto.submitLabel}</span>
+        <span class="submit-spinner" hidden>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 0.6s linear infinite; display: block; margin: 0 auto;">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+          </svg>
+        </span>
+      </button>
+    </form>
+    <div class="form-result" id="form-result" hidden></div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const resultDiv = document.getElementById('form-result') as HTMLDivElement;
+  const allInputs = form.querySelectorAll('.form-input') as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
+  const errorSpans = form.querySelectorAll('.form-error') as NodeListOf<HTMLSpanElement>;
+
+  function clearErrors() {
+    allInputs.forEach((el) => el.classList.remove('is-error'));
+    errorSpans.forEach((el) => (el.textContent = ''));
+  }
+
+  function showError(name: string, message: string) {
+    const input = form.querySelector(`[name="${name}"]`) as HTMLElement;
+    const span = form.querySelector(`[data-error="${name}"]`) as HTMLSpanElement;
+    input?.classList.add('is-error');
+    if (span) span.textContent = message;
+  }
+
+  function validate(): boolean {
+    clearErrors();
+    let valid = true;
+    const nameInput = form.querySelector('[name="name"]') as HTMLInputElement;
+    const emailInput = form.querySelector('[name="email"]') as HTMLInputElement;
+    const messageInput = form.querySelector('[name="message"]') as HTMLTextAreaElement;
+
+    if (!nameInput.value.trim()) {
+      showError('name', '${contacto.validation.nameRequired}');
+      valid = false;
+    }
+    if (!emailInput.value.trim()) {
+      showError('email', '${contacto.validation.emailRequired}');
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+      showError('email', '${contacto.validation.emailInvalid}');
+      valid = false;
+    }
+    if (!messageInput.value.trim()) {
+      showError('message', '${contacto.validation.messageRequired}');
+      valid = false;
+    }
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const submitBtn = form.querySelector('.form-submit') as HTMLButtonElement;
+    const labelEl = form.querySelector('.submit-label') as HTMLSpanElement;
+    const spinnerEl = form.querySelector('.submit-spinner') as HTMLSpanElement;
+
+    submitBtn.disabled = true;
+    labelEl.hidden = true;
+    spinnerEl.hidden = false;
+    allInputs.forEach((el) => (el.readOnly = true));
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      form.hidden = true;
+      resultDiv.hidden = false;
+
+      if (res.ok && data.success) {
+        resultDiv.innerHTML = `<div class="form-result-icon">✓</div><p class="form-result-success">${contacto.successMessage}</p>`;
+      } else {
+        resultDiv.innerHTML = `<p class="form-result-error">${contacto.errorMessage}</p>`;
+      }
+    } catch {
+      form.hidden = true;
+      resultDiv.hidden = false;
+      resultDiv.innerHTML = `<p class="form-result-error">${contacto.errorMessage}</p>`;
+    }
+  });
+</script>
+
+<style is:global>
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>

@@ -1,0 +1,169 @@
+---
+export interface Props {
+  data: {
+    capacidades: {
+      label: string;
+      title: string;
+      items: Array<{
+        title: string;
+        description: string;
+        icon: string;
+        upcoming: boolean;
+      }>;
+      upcoming: string;
+    };
+  };
+}
+
+const { data } = Astro.props;
+const { capacidades } = data;
+---
+
+<style>
+  .cap {
+    padding: 120px 24px;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .cap-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+  }
+
+  .cap-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: clamp(48px, 6vw, 72px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .cap-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cap-card {
+    position: relative;
+    padding: 40px 32px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--color-white);
+    transition: all 0.3s ease;
+  }
+
+  .cap-card:hover {
+    border-color: rgba(57, 181, 74, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .cap-card-number {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .cap-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .cap-card-title {
+    font-family: var(--font-body);
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .cap-card-body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-secondary);
+    line-height: 1.7;
+  }
+
+  .cap-badge {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--color-primary);
+    background: rgba(57, 181, 74, 0.08);
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .cap-card.is-upcoming {
+    opacity: 0.7;
+    border-style: dashed;
+  }
+
+  .cap-card.is-upcoming:hover {
+    opacity: 0.85;
+  }
+
+  @media (min-width: 768px) {
+    .cap-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cap-card:last-child {
+      grid-column: 1 / -1;
+      max-width: 50%;
+      justify-self: center;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cap-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .cap-card:last-child {
+      grid-column: auto;
+      max-width: none;
+      justify-self: auto;
+      width: auto;
+    }
+  }
+</style>
+
+<section class="cap" id="capacidades">
+  <span class="cap-label">{capacidades.label}</span>
+  <h2 class="cap-title">{capacidades.title}</h2>
+  <div class="cap-grid">
+    {capacidades.items.map((item, i) => (
+      <div class={`cap-card ${item.upcoming ? 'is-upcoming' : ''}`}>
+        {item.upcoming ? (
+          <span class="cap-badge">{capacidades.upcoming}</span>
+        ) : (
+          <span class="cap-card-number">{String(i + 1).padStart(2, '0')}</span>
+        )}
+        <div class="cap-icon">{item.icon}</div>
+        <h3 class="cap-card-title">{item.title}</h3>
+        <p class="cap-card-body">{item.description}</p>
+      </div>
+    ))}
+  </div>
+</section>

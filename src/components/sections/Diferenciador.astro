@@ -1,0 +1,152 @@
+---
+export interface Props {
+  data: {
+    diferenciador: {
+      label: string;
+      title: string;
+      steps: Array<{
+        label: string;
+        text: string;
+      }>;
+      close: string;
+    };
+  };
+}
+
+const { data } = Astro.props;
+const { diferenciador } = data;
+---
+
+<style>
+  .diff {
+    padding: 120px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .diff::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--color-primary), transparent);
+    opacity: 0.3;
+  }
+
+  .diff-label {
+    display: block;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+    margin-top: 40px;
+  }
+
+  .diff-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 700;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 56px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .diff-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .diff-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .diff-step-marker {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(57, 181, 74, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: 2px;
+  }
+
+  .diff-step-marker.alt {
+    background: rgba(88, 89, 91, 0.08);
+    color: var(--color-secondary);
+  }
+
+  .diff-step-content {
+    flex: 1;
+  }
+
+  .diff-step-title {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .diff-step-text {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-secondary);
+    line-height: 1.7;
+  }
+
+  .diff-close {
+    text-align: center;
+    margin-top: 56px;
+    padding: 32px 24px;
+    background: rgba(57, 181, 74, 0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(57, 181, 74, 0.1);
+  }
+
+  .diff-close-text {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 500;
+    color: var(--color-black);
+    line-height: 1.6;
+  }
+</style>
+
+<section class="diff" id="diferenciador">
+  <span class="diff-label">{diferenciador.label}</span>
+  <h2 class="diff-title">{diferenciador.title}</h2>
+  <div class="diff-steps">
+    {diferenciador.steps.map((step, i) => (
+      <div class="diff-step">
+        <span class={`diff-step-marker ${i === 1 ? 'alt' : ''}`}>{i + 1}</span>
+        <div class="diff-step-content">
+          <p class="diff-step-title">{step.label}</p>
+          <p class="diff-step-text">{step.text}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="diff-close">
+    <p class="diff-close-text">{diferenciador.close}</p>
+  </div>
+</section>

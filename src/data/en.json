@@ -1,0 +1,84 @@
+{
+  "site": {
+    "title": "mateLabs — Product Studio",
+    "description": "We build high-impact digital products using AI as a team multiplier. A Product Studio with artificial intelligence in our veins.",
+    "url": "https://matelabs.io/en"
+  },
+  "lang": {
+    "es": "ES",
+    "en": "EN"
+  },
+  "hero": {
+    "claim_pre": "We are a ",
+    "claim_accent": "Product Studio",
+    "claim_post": " with AI in our veins.",
+    "extension": "We build high-impact digital products using artificial intelligence as a team multiplier. With business models adapted to each industry and the needs of the moment.",
+    "cta": "Let's talk",
+    "scroll": "Explore"
+  },
+  "capacidades": {
+    "label": "Capabilities",
+    "title": "What we do",
+    "items": [
+      {
+        "title": "Streaming platforms",
+        "description": "White-label OTT for operators. From CMS to player, ready to scale.",
+        "icon": "🎬",
+        "upcoming": false
+      },
+      {
+        "title": "AI as a multiplier",
+        "description": "Frameworks and AI agents that replace multidisciplinary teams. More ambition with less friction.",
+        "icon": "🤖",
+        "upcoming": false
+      },
+      {
+        "title": "Tourism platforms",
+        "description": "Digital solutions for hospitality, flights, and transportation.",
+        "icon": "✈️",
+        "upcoming": true
+      }
+    ],
+    "upcoming": "Coming soon"
+  },
+  "diferenciador": {
+    "label": "Our approach",
+    "title": "Why us?",
+    "steps": [
+      { "label": "The problem", "text": "The market needs robust digital platforms tailored to Latin America." },
+      { "label": "The barrier", "text": "But building high-impact products requires multidisciplinary teams that are expensive and difficult to assemble." },
+      { "label": "Our answer", "text": "At mateLabs we use AI as a team multiplier to make viable products that weren't before." }
+    ],
+    "close": "Flexible business models, adapted to each industry and the moment of each project."
+  },
+  "contacto": {
+    "label": "Contact",
+    "title": "Let's talk",
+    "subtitle": "Have a project in mind? Tell us about it and let's build something together.",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "What do you have in mind?",
+    "submitLabel": "Send",
+    "successMessage": "Thank you. We'll get back to you within 48 hours.",
+    "errorMessage": "Something went wrong. Please try again or write to us at hola@matelabs.io",
+    "validation": {
+      "nameRequired": "This field is required",
+      "emailRequired": "This field is required",
+      "emailInvalid": "Invalid email",
+      "messageRequired": "This field is required"
+    }
+  },
+  "footer": {
+    "email": "hola@matelabs.io",
+    "copyright": "© 2026 mateLabs",
+    "backTop": "↑ Back to top",
+    "social": [
+      { "name": "LinkedIn", "url": "https://linkedin.com/company/matelabs", "label": "in" },
+      { "name": "X", "url": "https://x.com/matelabs", "label": "𝕏" },
+      { "name": "Instagram", "url": "https://instagram.com/matelabs", "label": "ig" }
+    ]
+  }
+}

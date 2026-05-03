@@ -1,0 +1,224 @@
+---
+export interface Props {
+  data: {
+    hero: {
+      claim_pre: string;
+      claim_accent: string;
+      claim_post: string;
+      extension: string;
+      cta: string;
+      scroll: string;
+    };
+    lang: {
+      es: string;
+      en: string;
+    };
+  };
+  locale: string;
+}
+
+const { data, locale } = Astro.props;
+const { hero, lang } = data;
+const otherLocale = locale === 'es' ? 'en' : 'es';
+---
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 40px 24px 80px;
+    background: #080808;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(57, 181, 74, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57, 181, 74, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, black 40%, transparent 100%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(57, 181, 74, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-lang {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 10;
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 4px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-lang-link {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.35);
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .hero-lang-link:hover {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .hero-lang-link.is-active {
+    color: var(--color-black);
+    background: var(--color-primary);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-logo {
+    height: clamp(48px, 8vw, 80px);
+    width: auto;
+    margin-bottom: clamp(40px, 8vh, 64px);
+  }
+
+  .hero-claim {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 5.5vw, 56px);
+    font-weight: 700;
+    color: var(--color-white);
+    max-width: 800px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .hero-claim-accent {
+    color: var(--color-primary);
+  }
+
+  .hero-ext {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-primary);
+    color: var(--color-black);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(15px, 1.8vw, 17px);
+    padding: 16px 36px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .hero-cta:hover {
+    background: #4cc95e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(57, 181, 74, 0.3);
+  }
+
+  .hero-cta-arrow {
+    transition: transform 0.25s ease;
+  }
+
+  .hero-cta:hover .hero-cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.35;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .hero-scroll:hover {
+    opacity: 0.7;
+  }
+
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--color-primary), transparent);
+  }
+
+  .hero-scroll-text {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--color-white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+</style>
+
+<section class="hero" id="hero">
+  <nav class="hero-lang" aria-label="Language switcher">
+    <a class={`hero-lang-link ${locale === 'es' ? 'is-active' : ''}`} href="/es/">{lang.es}</a>
+    <a class={`hero-lang-link ${locale === 'en' ? 'is-active' : ''}`} href="/en/">{lang.en}</a>
+  </nav>
+  <div class="hero-content">
+    <img
+      class="hero-logo"
+      src="/assets/logo-white.svg"
+      alt="mateLabs"
+    />
+    <h1 class="hero-claim">
+      {hero.claim_pre}<span class="hero-claim-accent">{hero.claim_accent}</span>{hero.claim_post}
+    </h1>
+    <p class="hero-ext">{hero.extension}</p>
+    <a class="hero-cta" href="#contacto">
+      {hero.cta}
+      <span class="hero-cta-arrow">→</span>
+    </a>
+  </div>
+  <a class="hero-scroll" href="#capacidades" aria-label={`Scroll ${hero.scroll}`}>
+    <span class="hero-scroll-line"></span>
+    <span class="hero-scroll-text">{hero.scroll}</span>
+  </a>
+</section>

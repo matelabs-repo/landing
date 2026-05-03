@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="172.2097mm"
+   height="71.452187mm"
+   viewBox="0 0 172.2097 71.452188"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1">
+      <path
+         d="M 0,36 H 86.65 V 0 H 0 Z"
+         transform="matrix(1,0,0,-1,-30.600101,0.70800002)"
+         id="path1" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4">
+      <path
+         d="M 0,36 H 86.65 V 0 H 0 Z"
+         transform="translate(-16.5094,-18.4152)"
+         id="path4" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6">
+      <path
+         d="M 0,36 H 86.65 V 0 H 0 Z"
+         transform="translate(-11.3244,-26.437701)"
+         id="path6" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath8">
+      <path
+         d="M 0,36 H 86.65 V 0 H 0 Z"
+         transform="translate(-13.252101,-21.144301)"
+         id="path8" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath9">
+      <path
+         d="M 0,36 H 86.65 V 0 H 0 Z"
+         transform="matrix(1,0,0,-1,-29.638201,11.726601)"
+         id="path9" />
+    </clipPath>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-33.499352,-2.3573646)">
+    <text
+       id="text1"
+       xml:space="preserve"
+       transform="matrix(2.0520441,0,0,2.0520441,94.258534,73.685572)"
+       clip-path="url(#clipPath1)"><tspan
+         id="tspan1"
+         style="font-variant:normal;font-weight:600;font-stretch:normal;font-size:12.1374px;font-family:Conthrax;writing-mode:lr-tb;fill:#2C2C2C;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="0"
+         dx="0 3.823281 3.823281 3.823281"
+         y="0">LABS</tspan></text>
+    <path
+       id="path2"
+       d="M 38.256593,5.0988894 54.422578,38.604693 58.237364,36.926075 44.48658,2.3573648 Z"
+       style="fill:#2C2C2C;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.05205" />
+    <path
+       id="path3"
+       d="M 0,0 C 2.624,-1.317 3.677,-4.499 2.353,-7.108 1.028,-9.716 -2.172,-10.764 -4.796,-9.447 -7.42,-8.13 -8.474,-4.948 -7.149,-2.339 -5.825,0.269 -2.624,1.317 0,0"
+       style="fill:#2C2C2C;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(2.0520441,0,0,-2.0520441,65.343771,37.349656)"
+       clip-path="url(#clipPath4)" />
+    <path
+       id="path5"
+       d="m 0,0 1.452,-3.942 c 3.892,0.585 7.852,-1.449 9.522,-5.201 2.001,-4.496 -0.042,-9.753 -4.564,-11.743 -4.521,-1.989 -9.809,0.042 -11.811,4.538 -1.647,3.7 -0.553,7.916 2.407,10.401 L -4.932,-2.2 c -4.896,-3.534 -6.824,-10.1 -4.276,-15.824 2.932,-6.586 10.679,-9.562 17.303,-6.647 6.625,2.915 9.619,10.617 6.687,17.203 C 12.216,-1.704 5.962,1.295 0,0"
+       style="fill:#2C2C2C;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(2.0520441,0,0,-2.0520441,54.703938,20.887129)"
+       clip-path="url(#clipPath6)" />
+    <path
+       id="path7"
+       d="m 0,0 0.157,-0.426 c 2.97,0.294 5.923,-1.307 7.197,-4.169 1.587,-3.566 -0.034,-7.736 -3.621,-9.314 -3.586,-1.579 -7.781,0.033 -9.368,3.599 -1.249,2.805 -0.512,5.983 1.605,7.98 l -0.21,0.407 c -2.321,-2.115 -3.143,-5.544 -1.799,-8.565 1.686,-3.787 6.141,-5.498 9.951,-3.822 3.809,1.676 5.531,6.105 3.845,9.893 C 6.388,-1.342 3.193,0.365 0,0"
+       style="fill:#2C2C2C;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(2.0520441,0,0,-2.0520441,58.659665,31.749398)"
+       clip-path="url(#clipPath8)" />
+    <text
+       id="text8"
+       xml:space="preserve"
+       transform="matrix(2.0520441,0,0,2.0520441,92.284655,51.07496)"
+       clip-path="url(#clipPath9)"><tspan
+         id="tspan8"
+         style="font-variant:normal;font-weight:700;font-stretch:normal;font-size:23.9904px;font-family:Aller;writing-mode:lr-tb;fill:#2C2C2C;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         x="0"
+         y="0">mate</tspan></text>
+  </g>
+</svg>

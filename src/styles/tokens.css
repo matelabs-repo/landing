@@ -1,0 +1,21 @@
+:root {
+  --color-primary: #39b54a;
+  --color-primary-hover: #2E9B3E;
+  --color-primary-active: #248230;
+  --color-secondary: #58595b;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-bg-light: #F5F5F5;
+  --color-error: #E74C3C;
+  --color-border: #CCCCCC;
+
+  --font-heading: 'Aller', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --bp-mobile: 767px;
+  --bp-tablet: 1023px;
+
+  --section-padding: 80px;
+  --content-max-width: 960px;
+  --form-max-width: 560px;
+}

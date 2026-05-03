@@ -1,0 +1,28 @@
+---
+import Head from '../../components/Head.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Capacidades from '../../components/sections/Capacidades.astro';
+import Diferenciador from '../../components/sections/Diferenciador.astro';
+import Contacto from '../../components/sections/Contacto.astro';
+import Footer from '../../components/Footer.astro';
+import data from '../../data/es.json';
+import '../../styles/global.css';
+
+const locale = 'es';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <Head data={data} />
+  </head>
+  <body>
+    <main>
+      <Hero data={data} locale={locale} />
+      <Capacidades data={data} />
+      <Diferenciador data={data} />
+      <Contacto data={data} />
+    </main>
+    <Footer data={data} />
+  </body>
+</html>
