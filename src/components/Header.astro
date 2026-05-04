@@ -1,0 +1,364 @@
+---
+export interface Props {
+  locale: string;
+  data: {
+    lang: { es: string; en: string };
+  };
+}
+
+const { locale, data } = Astro.props;
+const { lang } = data;
+const otherLocale = locale === 'es' ? 'en' : 'es';
+
+const t = {
+  productos: locale === 'es' ? 'Productos' : 'Products',
+  estudio: locale === 'es' ? 'Estudio' : 'Studio',
+  contacto: locale === 'es' ? 'Contacto' : 'Contact',
+  flux_desc: locale === 'es' ? 'Suite OTT white-label' : 'White-label OTT Suite',
+  turismo: locale === 'es' ? 'Turismo' : 'Tourism',
+  proximamente: locale === 'es' ? 'Próximamente' : 'Coming soon',
+};
+---
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 24px;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+  }
+
+  .nav.is-scrolled {
+    background: rgba(8, 8, 8, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    height: 28px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nav-item:hover {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-item-arrow {
+    transition: transform 0.2s ease;
+    font-size: 10px;
+  }
+
+  .nav-item:hover .nav-item-arrow {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: rgba(18, 18, 20, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 12px;
+    min-width: 260px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-item:hover .nav-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .nav-dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-radius: 10px;
+    transition: background 0.15s ease;
+    text-decoration: none;
+  }
+
+  .nav-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-dropdown-label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-white);
+  }
+
+  .nav-dropdown-desc {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 2px;
+  }
+
+  .nav-badge {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  .nav-badge-active {
+    background: rgba(57, 181, 74, 0.15);
+    color: var(--color-primary);
+  }
+
+  .nav-badge-upcoming {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-lang {
+    display: flex;
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 3px;
+  }
+
+  .nav-lang-link {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .nav-lang-link:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .nav-lang-link.is-active {
+    color: var(--color-black);
+    background: var(--color-primary);
+  }
+
+  .nav-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    .nav-mobile-toggle {
+      display: none;
+    }
+  }
+
+  .nav-mobile-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .nav-mobile-icon span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--color-white);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(8, 8, 8, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 16px;
+  }
+
+  .nav-mobile-menu.is-open {
+    display: block;
+  }
+
+  .nav-mobile-link {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-white);
+    padding: 12px 16px;
+    border-radius: 10px;
+    transition: background 0.15s ease;
+  }
+
+  .nav-mobile-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-mobile-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    margin: 8px 0;
+  }
+</style>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href={`/${locale}/`} aria-label="mateLabs Home">
+      <img class="nav-logo" src="/assets/logo-white.svg" alt="mateLabs" />
+    </a>
+
+    <div class="nav-links">
+      <div class="nav-item">
+        {t.productos}
+        <span class="nav-item-arrow">▾</span>
+        <div class="nav-dropdown">
+          <a class="nav-dropdown-item" href={`/${locale}/flux/`}>
+            <div>
+              <div class="nav-dropdown-label">Flux</div>
+              <div class="nav-dropdown-desc">{t.flux_desc}</div>
+            </div>
+            <span class="nav-badge nav-badge-active">{locale === 'es' ? 'activo' : 'active'}</span>
+          </a>
+          <div class="nav-dropdown-item" style="opacity:0.5;cursor:default;">
+            <div>
+              <div class="nav-dropdown-label">{t.turismo}</div>
+              <div class="nav-dropdown-desc">{t.proximamente}</div>
+            </div>
+            <span class="nav-badge nav-badge-upcoming">{t.proximamente}</span>
+          </div>
+        </div>
+      </div>
+      <a class="nav-item" href={`/${locale}/#diferenciador`}>{t.estudio}</a>
+      <a class="nav-item" href={`/${locale}/#contacto`}>{t.contacto}</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="nav-lang">
+        <a class={`nav-lang-link ${locale === 'es' ? 'is-active' : ''}`} href="/es/">{lang.es}</a>
+        <a class={`nav-lang-link ${locale === 'en' ? 'is-active' : ''}`} href="/en/">{lang.en}</a>
+      </div>
+      <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Menu">
+        <span class="nav-mobile-icon">
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a class="nav-mobile-link" href={`/${locale}/flux/`}>Flux</a>
+    <div class="nav-mobile-divider"></div>
+    <a class="nav-mobile-link" href={`/${locale}/#diferenciador`}>{t.estudio}</a>
+    <a class="nav-mobile-link" href={`/${locale}/#contacto`}>{t.contacto}</a>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById('nav') as HTMLElement;
+  const toggle = document.getElementById('mobile-toggle') as HTMLButtonElement;
+  const menu = document.getElementById('mobile-menu') as HTMLDivElement;
+  const isHome = window.location.pathname === '/es/' || window.location.pathname === '/en/' || window.location.pathname === '/' || window.location.pathname === '';
+
+  function updateNav() {
+    const scrolled = window.scrollY > 20;
+    if (scrolled) {
+      nav.classList.add('is-scrolled');
+    } else if (isHome) {
+      nav.classList.remove('is-scrolled');
+    } else {
+      nav.classList.add('is-scrolled');
+    }
+  }
+
+  if (!isHome) {
+    nav.classList.add('is-scrolled');
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('is-open');
+  });
+
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => menu.classList.remove('is-open'));
+  });
+</script>

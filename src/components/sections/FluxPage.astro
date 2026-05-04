@@ -1,0 +1,356 @@
+---
+export interface Props {
+  data: Record<string, any>;
+  locale: string;
+}
+
+const { data, locale } = Astro.props;
+
+const t = {
+  hero_title: locale === 'es' ? 'Tu plataforma de streaming.' : 'Your streaming platform.',
+  hero_sub: locale === 'es' ? 'Lista en días, no en meses.' : 'Ready in days, not months.',
+  hero_desc: locale === 'es' ? 'Flux es la suite OTT white-label de mateLabs. Cuatro productos que cubren todo el ciclo de vida del streaming: gestión de contenido, distribución, reproducción web y apps nativas.' : 'Flux is mateLabs\' white-label OTT suite. Four products covering the entire streaming lifecycle: content management, distribution, web playback, and native apps.',
+  hero_cta: locale === 'es' ? 'Hablar con ventas' : 'Talk to sales',
+  products_title: locale === 'es' ? 'Productos Flux' : 'Flux Products',
+  features_title: locale === 'es' ? 'Features clave' : 'Key Features',
+  cta_title: locale === 'es' ? '¿Listo para lanzar?' : 'Ready to launch?',
+  cta_sub: locale === 'es' ? 'Armemos juntos tu plataforma de streaming. Sin humo, sin plazos irreales.' : 'Let\'s build your streaming platform together. No fluff, no unrealistic timelines.',
+  cta_btn: locale === 'es' ? 'Agendar demo' : 'Schedule demo',
+};
+
+const products = [
+  {
+    name: 'flux studio',
+    label: locale === 'es' ? 'CMS Backoffice' : 'CMS Backoffice',
+    desc: locale === 'es' ? 'Gestioná tu contenido, metadatos, programación y monetización desde un solo lugar. Diseñado para equipos editoriales, no para ingenieros.' : 'Manage your content, metadata, scheduling, and monetization from a single place. Designed for editorial teams, not engineers.',
+  },
+  {
+    name: 'flux play',
+    label: locale === 'es' ? 'Reproductor Web' : 'Web Player',
+    desc: locale === 'es' ? 'Experiencia de streaming en navegador. Catálogo, búsqueda, recomendaciones y reproducción con DRM. White-label completo.' : 'Browser streaming experience. Catalog, search, recommendations, and DRM-protected playback. Full white-label.',
+  },
+  {
+    name: 'flux go',
+    label: locale === 'es' ? 'App Móvil' : 'Mobile App',
+    desc: locale === 'es' ? 'App nativa iOS y Android para tus usuarios. Experiencia mobile-first con reproducción offline y notificaciones push.' : 'Native iOS and Android app for your users. Mobile-first experience with offline playback and push notifications.',
+  },
+  {
+    name: 'flux tv',
+    label: locale === 'es' ? 'Smart TV' : 'Smart TV',
+    desc: locale === 'es' ? 'App para televisores conectados. La experiencia de streaming en la pantalla más grande de la casa.' : 'App for connected TVs. The streaming experience on the biggest screen in the house.',
+  },
+];
+
+const features = [
+  {
+    title: locale === 'es' ? 'CMS Multi-tenant' : 'Multi-tenant CMS',
+    desc: locale === 'es' ? 'Un backoffice, múltiples operadores. Cada uno con su contenido, usuarios y configuración independiente.' : 'One backoffice, multiple operators. Each with independent content, users, and configuration.',
+  },
+  {
+    title: locale === 'es' ? 'DRM & Seguridad' : 'DRM & Security',
+    desc: locale === 'es' ? 'Protección de contenido con DRM multi-esquema. Streaming seguro con tokens JWT por usuario.' : 'Content protection with multi-scheme DRM. Secure streaming with per-user JWT tokens.',
+  },
+  {
+    title: locale === 'es' ? 'Monetización Flexible' : 'Flexible Monetization',
+    desc: locale === 'es' ? 'Modelos FREE (con publicidad) y PREMIUM (suscripción). Configurable por operador.' : 'FREE (ad-supported) and PREMIUM (subscription) models. Configurable per operator.',
+  },
+  {
+    title: locale === 'es' ? 'White-label Completo' : 'Full White-label',
+    desc: locale === 'es' ? 'Tu marca, tus colores, tu dominio. Flux es invisible para tus usuarios finales.' : 'Your brand, your colors, your domain. Flux is invisible to your end users.',
+  },
+  {
+    title: locale === 'es' ? 'Escalabilidad Elástica' : 'Elastic Scalability',
+    desc: locale === 'es' ? 'Infraestructura que escala con tu audiencia. Desde 100 hasta millones de usuarios.' : 'Infrastructure that scales with your audience. From 100 to millions of users.',
+  },
+  {
+    title: locale === 'es' ? 'Pipeline de Transcoding' : 'Transcoding Pipeline',
+    desc: locale === 'es' ? 'Procesamiento automático de video. Subí tu contenido en un formato y Flux lo optimiza para todas las pantallas.' : 'Automatic video processing. Upload your content in one format and Flux optimizes it for every screen.',
+  },
+];
+---
+
+<style>
+  .flux-hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    background: #0E0F14;
+    overflow: hidden;
+  }
+
+  .flux-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 40%, rgba(79, 71, 205, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 80% 20%, rgba(128, 179, 255, 0.06) 0%, transparent 50%);
+  }
+
+  .flux-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .flux-hero-badge {
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #80B3FF;
+    background: rgba(128, 179, 255, 0.08);
+    border-radius: 8px;
+    padding: 5px 14px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .flux-hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    color: #F0F0F5;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .flux-hero-sub {
+    font-family: var(--font-heading);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+  }
+
+  .flux-hero-desc {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    color: #9699A8;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .flux-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-primary);
+    color: var(--color-black);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 15px 32px;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+  }
+
+  .flux-cta:hover {
+    background: #4cc95e;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(57, 181, 74, 0.35);
+  }
+
+  .flux-products {
+    padding: 100px 24px;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    background: #0E0F14;
+  }
+
+  .flux-section-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #80B3FF;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .flux-section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: #F0F0F5;
+    margin-bottom: 48px;
+    letter-spacing: -0.02em;
+  }
+
+  .flux-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .flux-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .flux-card {
+    padding: 36px 28px;
+    border-radius: 16px;
+    background: #13151B;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.3s ease;
+  }
+
+  .flux-card:hover {
+    background: #1C1E26;
+    border-color: rgba(79, 71, 205, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .flux-card-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: #80B3FF;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .flux-card-title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: #F0F0F5;
+    margin-bottom: 8px;
+  }
+
+  .flux-card-desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    color: #9699A8;
+    line-height: 1.6;
+  }
+
+  .flux-features {
+    padding: 100px 24px;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    background: #0E0F14;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  .flux-features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .flux-features-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .flux-feature {
+    padding: 28px 24px;
+    border-radius: 12px;
+    background: #13151B;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  .flux-feature-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: #F0F0F5;
+    margin-bottom: 8px;
+  }
+
+  .flux-feature-desc {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    color: #9699A8;
+    line-height: 1.6;
+  }
+
+  .flux-cta-section {
+    padding: 100px 24px;
+    text-align: center;
+    background: #0E0F14;
+  }
+
+  .flux-cta-title {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: #F0F0F5;
+    margin-bottom: 12px;
+  }
+
+  .flux-cta-sub {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    color: #9699A8;
+    margin-bottom: 36px;
+  }
+</style>
+
+<main>
+  <section class="flux-hero">
+    <div class="flux-hero-content">
+      <span class="flux-hero-badge">Producto</span>
+      <h1 class="flux-hero-title">{t.hero_title}</h1>
+      <p class="flux-hero-sub">{t.hero_sub}</p>
+      <p class="flux-hero-desc">{t.hero_desc}</p>
+      <a class="flux-cta" href={`/${locale}/#contacto`}>
+        {t.hero_cta}
+        <span>→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="flux-products" id="products">
+    <span class="flux-section-label">Suite</span>
+    <h2 class="flux-section-title">{t.products_title}</h2>
+    <div class="flux-grid">
+      {products.map((p) => (
+        <div class="flux-card">
+          <span class="flux-card-name">{p.name}</span>
+          <h3 class="flux-card-title">{p.label}</h3>
+          <p class="flux-card-desc">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="flux-features" id="features">
+    <span class="flux-section-label" style="color:var(--color-primary)">Stack</span>
+    <h2 class="flux-section-title">{t.features_title}</h2>
+    <div class="flux-features-grid">
+      {features.map((f) => (
+        <div class="flux-feature">
+          <h3 class="flux-feature-title">{f.title}</h3>
+          <p class="flux-feature-desc">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="flux-cta-section" id="cta">
+    <h2 class="flux-cta-title">{t.cta_title}</h2>
+    <p class="flux-cta-sub">{t.cta_sub}</p>
+    <a class="flux-cta" href={`/${locale}/#contacto`}>
+      {t.cta_btn}
+      <span>→</span>
+    </a>
+  </section>
+</main>
