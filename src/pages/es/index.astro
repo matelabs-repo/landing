@@ -1,8 +1,10 @@
 ---
 import Head from '../../components/Head.astro';
+import Header from '../../components/Header.astro';
 import Hero from '../../components/sections/Hero.astro';
 import Capacidades from '../../components/sections/Capacidades.astro';
 import Diferenciador from '../../components/sections/Diferenciador.astro';
+import Productos from '../../components/sections/Productos.astro';
 import Contacto from '../../components/sections/Contacto.astro';
 import Footer from '../../components/Footer.astro';
 import data from '../../data/es.json';
@@ -17,12 +19,14 @@ const locale = 'es';
     <Head data={data} />
   </head>
   <body>
+    <Header locale={locale} data={data} />
     <main>
-      <Hero data={data} locale={locale} />
-      <Capacidades data={data} />
+      <Hero data={data} />
+      <Capacidades data={data} locale={locale} />
+      <Productos locale={locale} />
       <Diferenciador data={data} />
       <Contacto data={data} />
     </main>
-    <Footer data={data} />
+    <Footer data={data} locale={locale} />
   </body>
 </html>

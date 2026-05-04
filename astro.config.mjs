@@ -22,5 +22,5 @@ export default defineConfig({
     },
   },
 
-  adapter: cloudflare()
+  adapter: cloudflare({ mode: 'directory' })
 });

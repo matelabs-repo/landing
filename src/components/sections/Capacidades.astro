@@ -13,10 +13,16 @@ export interface Props {
       upcoming: string;
     };
   };
+  locale: string;
 }
 
-const { data } = Astro.props;
+const { data, locale } = Astro.props;
 const { capacidades } = data;
+const iconMap: Record<string, string> = {
+  '🎬': '/images/icons/play.png',
+  '🤖': '/images/icons/play.png',
+  '✈️': '/images/icons/play.png',
+};
 ---
 
 <style>
@@ -25,6 +31,7 @@ const { capacidades } = data;
     max-width: var(--content-max-width);
     margin: 0 auto;
     position: relative;
+    background: var(--color-white);
   }
 
   .cap-label {
@@ -35,16 +42,18 @@ const { capacidades } = data;
     text-transform: uppercase;
     color: var(--color-primary);
     margin-bottom: 16px;
+    display: block;
   }
 
   .cap-title {
     font-family: var(--font-heading);
-    font-size: clamp(28px, 4.5vw, 42px);
+    font-size: clamp(30px, 4.5vw, 48px);
     font-weight: 700;
     color: var(--color-black);
     margin-bottom: clamp(48px, 6vw, 72px);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    max-width: 700px;
   }
 
   .cap-grid {
@@ -55,40 +64,57 @@ const { capacidades } = data;
 
   .cap-card {
     position: relative;
-    padding: 40px 32px;
-    border-radius: 16px;
+    padding: 48px 36px;
+    border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.06);
     background: var(--color-white);
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
+    overflow: hidden;
+  }
+
+  .cap-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(57, 181, 74, 0.03) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
   }
 
   .cap-card:hover {
     border-color: rgba(57, 181, 74, 0.2);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+    transform: translateY(-3px);
+  }
+
+  .cap-card:hover::before {
+    opacity: 1;
   }
 
   .cap-card-number {
     font-family: var(--font-heading);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--color-primary);
-    letter-spacing: 2px;
-    margin-bottom: 24px;
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 28px;
   }
 
   .cap-icon {
-    font-size: 40px;
-    margin-bottom: 20px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+    object-fit: contain;
   }
 
   .cap-card-title {
     font-family: var(--font-body);
-    font-size: clamp(18px, 2.5vw, 22px);
+    font-size: clamp(18px, 2.5vw, 24px);
     font-weight: 600;
     color: var(--color-black);
     margin-bottom: 12px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
   }
 
   .cap-card-body {
@@ -97,6 +123,7 @@ const { capacidades } = data;
     font-weight: 400;
     color: var(--color-secondary);
     line-height: 1.7;
+    max-width: 360px;
   }
 
   .cap-badge {
@@ -106,27 +133,26 @@ const { capacidades } = data;
     font-weight: 600;
     letter-spacing: 1.5px;
     color: var(--color-primary);
-    background: rgba(57, 181, 74, 0.08);
-    border-radius: 6px;
-    padding: 6px 12px;
-    margin-bottom: 16px;
+    background: rgba(57, 181, 74, 0.07);
+    border-radius: 8px;
+    padding: 6px 14px;
+    margin-bottom: 20px;
     text-transform: uppercase;
   }
 
   .cap-card.is-upcoming {
-    opacity: 0.7;
+    opacity: 0.6;
     border-style: dashed;
   }
 
   .cap-card.is-upcoming:hover {
-    opacity: 0.85;
+    opacity: 0.8;
   }
 
   @media (min-width: 768px) {
     .cap-grid {
       grid-template-columns: 1fr 1fr;
     }
-
     .cap-card:last-child {
       grid-column: 1 / -1;
       max-width: 50%;
@@ -139,7 +165,6 @@ const { capacidades } = data;
     .cap-grid {
       grid-template-columns: 1fr 1fr 1fr;
     }
-
     .cap-card:last-child {
       grid-column: auto;
       max-width: none;
@@ -160,7 +185,7 @@ const { capacidades } = data;
         ) : (
           <span class="cap-card-number">{String(i + 1).padStart(2, '0')}</span>
         )}
-        <div class="cap-icon">{item.icon}</div>
+        <img class="cap-icon" src={iconMap[item.icon] || `/images/icons/play.png`} alt="" aria-hidden="true" loading="lazy" />
         <h3 class="cap-card-title">{item.title}</h3>
         <p class="cap-card-body">{item.description}</p>
       </div>

@@ -15,9 +15,10 @@ export interface Props {
       }>;
     };
   };
+  locale: string;
 }
 
-const { data } = Astro.props;
+const { data, locale } = Astro.props;
 const { footer, site } = data;
 ---
 
@@ -194,7 +195,7 @@ const { footer, site } = data;
   </div>
   <div class="footer-divider"></div>
   <div class="footer-bottom">
-    <a class="footer-back-top" href="#hero">{footer.backTop}</a>
+    <a class="footer-back-top" href={`/${locale}/`}>{footer.backTop}</a>
     <p class="footer-copy">{footer.copyright}</p>
   </div>
 </footer>
